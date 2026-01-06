@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <section class="main-section">
+        <div class="container">
+            <h2 class="section-title">Главная страница</h2>
+            <div class="profession-description">
+                {% for context in context %}
+                    <div class="description-item">
+                        <h3 class="description-header">{{ context.header|safe }}</h3>
+                        <p class="description-summary">{{ context.summary|safe }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="image-gallery">
+                {% for context in context %}
+                    <div class="gallery-item">
+                        <img src="{{ context.banner_image.url }}" alt="Главное изображение">
+                    </div>
+                    {% for img in context.extra_images.all %}
+                        <div class="gallery-item">
+                            <img src="{{ img.image.url }}" alt="Дополнительное изображение">
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <div id="image-modal" class="modal hidden">
+        <div class="modal-content">
+            <button class="close-button">&times;</button>
+            <img id="modal-image" src="" alt="">
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        const modal = document.getElementById('image-modal');
+        const modalImage = document.getElementById('modal-image');
+        const closeModal = document.querySelector('.close-button');
+        const galleryItems = document.querySelectorAll('.gallery-item img');
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                modalImage.src = item.src;
+                modal.classList.add('show');
+            });
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.classList.remove('show');
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('show');
+            }
+        });
+    </script>
+{% endblock %}
