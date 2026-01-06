@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <h2 class="page-title">Востребованность</h2>
+
+        <section class="stats-section">
+            <h3 class="media-title">Динамика уровня зарплат по годам для профессии {{ PROFESSION_NAME }}</h3>
+            <div class="stats-plot">
+                <img class="stats-image" alt="График зарплат" src="{{ salary_graph }}">
+            </div>
+        </section>
+
+        <section class="stats-section">
+            <h3 class="media-title">Таблица динамики зарплат по годам для профессии {{ PROFESSION_NAME }}</h3>
+            <div class="stats-table-wrapper">
+                <div class="stats-table">
+                    {{ salary_data|safe }}
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-section">
+            <h3 class="media-title">Динамика количества вакансий по годам для профессии {{ PROFESSION_NAME }}</h3>
+            <div class="stats-plot">
+                <img class="stats-image" alt="График вакансий" src="{{ vacancy_graph }}">
+            </div>
+        </section>
+
+        <section class="stats-section">
+            <h3 class="media-title">Таблица количества вакансий по годам для профессии {{ PROFESSION_NAME }}</h3>
+            <div class="stats-table-wrapper">
+                <div class="stats-table">
+                    {{ vacancy_data|safe }}
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
