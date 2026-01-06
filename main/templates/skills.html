@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <h2 class="page-title">Навыки</h2>
+
+        <section class="stats-section">
+            <h3 class="media-title">ТОП-20 навыков по годам для профессии {{ PROFESSION_NAME }}</h3>
+            <div class="stats-plot">
+                <img class="stats-image" alt="График топ 20 навыков по годам" src="{{ skill_chart }}">
+            </div>
+        </section>
+
+        <section class="stats-section">
+            <h3 class="media-title">Таблица навыков</h3>
+            <div class="stats-table-wrapper">
+                <div class="stats-table">
+                    {{ skill_table|safe }}
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
